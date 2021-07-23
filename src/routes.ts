@@ -1,0 +1,23 @@
+import { Router } from "express";
+import authMiddleware from "./app/middleware/authMiddleware";
+import UserController from "./app/controllers/UserController";
+import AuthController from "./app/controllers/AuthController";
+import EmployeesController from "./app/controllers/EmployeesController";
+import FiliaisController from "./app/controllers/FiliaisController";
+const router = Router();
+router.post("/users", UserController.store);
+router.get("/users", UserController.getUsers);
+
+router.post("/auth", AuthController.authenticate);
+router.get("/users", authMiddleware, UserController.index);
+router.post("/funcionarios", EmployeesController.store);
+router.get("/funcionarios", EmployeesController.getUsers);
+router.get("/funcionarios/:id", EmployeesController.getUser);
+router.put("/funcionarios/:id", EmployeesController.updateUser);
+router.delete("/funcionarios/:id", EmployeesController.deleteUser);
+router.post("/filiais", FiliaisController.store);
+router.get("/filiais", FiliaisController.getFiliais);
+router.get("/funcionarios/:id", FiliaisController.getFilial);
+router.delete("/filiais/:id", FiliaisController.deleteFilial);
+router.put("/filiais/:id", FiliaisController.updateFilial);
+export default router;
